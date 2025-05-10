@@ -1,0 +1,30 @@
+.button-style {
+    -fx-pref-width: 70;
+    -fx-pref-height: 20;
+}
+.large-button-style {
+    -fx-pref-width: 120;
+    -fx-pref-height: 20;
+}
+.pane-style{
+	-fx-alignment:center;
+	-fx-vgap:5;
+	-fx-hgap:5;
+}
+.textfield-style{
+	-fx-pref-width: 400;
+    -fx-pref-height: 20;
+}
+.large-textfield-style{
+	-fx-pref-width: 400;
+    -fx-pref-height: 200;
+}
+.listview-style{
+	-fx-pref-width: 360;
+    -fx-pref-height: 300;
+}
+.label-style{
+    -fx-pref-width: 120;
+    -fx-pref-height: 20;
+    -fx-alignment: center;
+}
