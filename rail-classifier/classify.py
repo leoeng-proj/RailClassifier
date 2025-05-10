@@ -11,7 +11,8 @@ model = tf.keras.models.load_model("model.keras", custom_objects={
     'darken': darken,
     'clip_range': clip_range
 })
-model.summary()
+# model.summary()
+
 #load and prep data
 input_dir = "C:/Users/apoll/Desktop/pxfclassify/data/rails/test"
 data = []
@@ -35,18 +36,18 @@ if data.size == 0:
 #predict
 print("Predicting...")
 predictions = model.predict(data)
-print(predictions)
+# print(predictions)
 
 #classify with predictions
-# print("Classifying...")
-# class_mapping = {0: "anomalous", 1: "extreme wear", 2: "heavy wear", 3: "min wear", 4: "new"}
-# output_dir = input_dir
-# for i, pred in enumerate(predictions):
-#     predicted_index = np.argmax(pred)
-#     folder_name = class_mapping[predicted_index]
-#     os.makedirs(os.path.join(output_dir, folder_name), exist_ok=True)  # Create folder if it doesn't exist
-#     source = os.path.join(input_dir, img_names[i])
-#     dest = os.path.join(output_dir, folder_name, img_names[i])
-#     os.replace(source, dest)
-# print("Samples classified and saved into folders.")
-# exit(0)
+print("Classifying...")
+class_mapping = {0: "anomalous", 1: "extreme wear", 2: "heavy wear", 3: "min wear", 4: "new"}
+output_dir = input_dir
+for i, pred in enumerate(predictions):
+    predicted_index = np.argmax(pred)
+    folder_name = class_mapping[predicted_index]
+    os.makedirs(os.path.join(output_dir, folder_name), exist_ok=True)  # Create folder if it doesn't exist
+    source = os.path.join(input_dir, img_names[i])
+    dest = os.path.join(output_dir, folder_name, img_names[i])
+    os.replace(source, dest)
+print("Samples classified and saved into folders.")
+exit(0)

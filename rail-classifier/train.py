@@ -42,7 +42,7 @@ class_weights_array = class_weight.compute_class_weight(
 class_weights = dict(enumerate(class_weights_array))
 print(class_weights)
 
-num_classes = 5  # update if different
+num_classes = 5
 def one_hot_encode(image, label):
     return image, tf.one_hot(label, depth=num_classes)
 train_ds = train_ds.map(one_hot_encode)
@@ -82,10 +82,9 @@ model = Sequential([
 #     'clip_range': clip_range
 # })
 model.summary()
-model.compile(loss='categorical_crossentropy', #labels are either 1 or 0
+model.compile(loss='categorical_focal_crossentropy', #labels are either 1 or 0
              optimizer='adam',
               metrics=['acc']) #tracks accuracy during training/validation
-
 
 
 #checkpoint the best model
@@ -107,19 +106,3 @@ history = model.fit(
     class_weight=class_weights,
     callbacks = [checkpoint]
 )
-
-#confusion matrix
-# model = tf.keras.models.load_model("model.keras")
-# y_true = []
-# y_pred = []
-# for images, labels in val_ds:
-#     preds = model.predict(images)
-#     y_true.extend(labels.numpy())
-#     y_pred.extend(np.argmax(preds, axis=1))
-# y_true = np.array(y_true)
-# y_pred = np.array(y_pred)
-# cm = confusion_matrix(y_true, y_pred)
-# disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-# disp.plot(cmap='Blues', xticks_rotation=45)
-# plt.title("Confusion Matrix")
-# plt.show()
